@@ -1,11 +1,15 @@
 ---
 - hosts: localhost
+  vars_files:
+    - vars.yml
   tasks:
     - name: create an ec2 instance
       ec2:
         key_name: sharadakey1
         region: us-east-1
         instance_type: t2.micro
+        access_key: "{{ AccessKey }}"
+        secret_key: "{{ SecretKey }}"  
         image: ami-0c293f3f676ec4f90
         wait: yes
         count: 1
@@ -13,4 +17,4 @@
         assign_public_ip: yes
 
     - name: just print name
-      shell: echo "new instance created through git bash"
+      shell: echo "creating a new instance using jenkins"
